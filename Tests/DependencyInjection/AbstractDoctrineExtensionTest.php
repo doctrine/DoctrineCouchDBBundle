@@ -76,6 +76,32 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
         $this->assertTrue($container->has('doctrine_couchdb.odm.test2_document_manager'));
     }
 
+    public function testMappings()
+    {
+        $container = $this->getContainer();
+        $loader = new CouchDBExtension();
+
+        $loader->load(array(
+            array(
+                'client' => array(),
+                'odm' => array(
+                    'default_document_manager' => 'test',
+                    'document_managers' => array(
+                        'test' => array('connection' => 'default', 'mappings' => array('YamlBundle' => array()))
+                    )
+                )
+            )
+        ), $container);
+
+        $this->assertTrue($container->has('doctrine_couchdb.odm.test_metadata_driver'));
+
+        $methodCalls = $container->getDefinition('doctrine_couchdb.odm.test_metadata_driver')->getMethodCalls();
+        $this->assertArrayHasKey(0, $methodCalls);
+        $this->assertEquals('addDriver', $methodCalls[0][0]);
+        $this->assertEquals('Fixtures\Bundles\YamlBundle\CouchDocument', $methodCalls[0][1][1]);
+        $this->assertEquals(new Reference('doctrine_couchdb.odm.test_yml_metadata_driver'), $methodCalls[0][1][0]);
+    }
+
     protected function getContainer($bundles = 'YamlBundle', $vendor = null)
     {
         $bundles = (array) $bundles;

@@ -245,6 +245,6 @@ class CouchDBExtension extends AbstractDoctrineExtension
 
     protected function getMappingResourceExtension()
     {
-        return 'couchdb';
+        return 'couch';
     }
 }
