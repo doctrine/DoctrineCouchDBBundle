@@ -15,6 +15,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Configuration for the CouchDB extension
+ *
+ * @author Benjamin Eberlei <kontakt@beberlei.de>
+ */
 class Configuration implements ConfigurationInterface
 {
     private $debug;
@@ -61,7 +66,8 @@ class Configuration implements ConfigurationInterface
                             'user',
                             'password',
                             'ip',
-                            'logging'
+                            'logging',
+                            'type'
                         ) as $key) {
                             if (array_key_exists($key, $v)) {
                                 $connection[$key] = $v[$key];
@@ -100,6 +106,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('password')->defaultNull()->end()
                     ->scalarNode('ip')->defaultNull()->end()
                     ->booleanNode('logging')->defaultValue($this->debug)->end()
+                    ->scalarNode('type')->end()
                 ->end()
             ->end()
         ;
@@ -116,7 +123,7 @@ class Configuration implements ConfigurationInterface
                         ->ifTrue(function ($v) { return null === $v || (is_array($v) && !array_key_exists('document_managers', $v) && !array_key_exists('document_manager', $v)); })
                         ->then(function ($v) {
                             $v = (array) $v;
-                            $entityManager = array();
+                            $documentManagers = array();
                             foreach (array(
                                 'metadata_cache_driver', 'metadata-cache-driver',
                                 'auto_mapping', 'auto-mapping',
@@ -124,12 +131,12 @@ class Configuration implements ConfigurationInterface
                                 'connection'
                             ) as $key) {
                                 if (array_key_exists($key, $v)) {
-                                    $entityManager[$key] = $v[$key];
+                                    $documentManagers[$key] = $v[$key];
                                     unset($v[$key]);
                                 }
                             }
                             $v['default_document_manager'] = isset($v['default_document_manager']) ? (string) $v['default_document_manager'] : 'default';
-                            $v['document_managers'] = array($v['default_document_manager'] => $entityManager);
+                            $v['document_managers'] = array($v['default_document_manager'] => $documentManagers);
 
                             return $v;
                         })
@@ -140,7 +147,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('proxy_dir')->defaultValue('%kernel.cache_dir%/doctrine/CouchDBProxies')->end()
                         ->scalarNode('proxy_namespace')->defaultValue('CouchDBProxies')->end()
                     ->end()
-                    ->fixXmlConfig('entity_manager')
+                    ->fixXmlConfig('document_manager')
                     ->append($this->getOdmDocumentManagersNode())
                 ->end()
             ->end()

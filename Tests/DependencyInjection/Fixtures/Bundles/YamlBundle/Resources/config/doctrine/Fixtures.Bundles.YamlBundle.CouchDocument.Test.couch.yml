@@ -1,0 +1,4 @@
+Fixtures\Bundles\YamlBundle\CouchDocument\Test:
+  type: document
+  id:
+    id: ~

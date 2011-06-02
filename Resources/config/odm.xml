@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="doctrine_couchdb.odm.configuration.class">Doctrine\ODM\CouchDB\Configuration</parameter>
+        <parameter key="doctrine_couchdb.odm.document_manager.class">Doctrine\ODM\CouchDB\DocumentManager</parameter>
+        <parameter key="doctrine_couchdb.odm.document_manager.event_manager.class">Doctrine\Common\EventManager</parameter>
+
+        <!-- cache -->
+        <parameter key="doctrine_couchdb.odm.cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.memcache.class">Doctrine\Common\Cache\MemcacheCache</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.memcache_host">localhost</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.memcache_port">11211</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.memcache_instance.class">Memcache</parameter>
+        <parameter key="doctrine_couchdb.odm.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
+    </parameters>
+
+    <services>
+        <service
+            id="doctrine_couchdb.odm.configuration"
+            class="%doctrine_couchdb.odm.configuration.class%"
+            abstract="true"
+            public="false"
+        />
+
+        <service
+            id="doctrine_couchdb.odm.document_manager.abstract"
+            class="%doctrine_couchdb.odm.document_manager.class%"
+            abstract="true"
+        />
+
+        <service
+            id="doctrine_couchdb.odm.document_manager.event_manager"
+            abstract="true"
+            class="%doctrine_couchdb.odm.document_manager.event_manager.class%"
+        />
+    </services>
+</container>
