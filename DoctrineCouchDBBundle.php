@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\CouchDBBundle;
+namespace Symfony\Bundle\DoctrineCouchDBBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SymfonyCouchDBBundle extends Bundle
+class DoctrineCouchDBBundle extends Bundle
 {
     
 }

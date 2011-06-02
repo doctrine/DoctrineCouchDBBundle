@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\CouchDBBundle\Tests\DependencyInjection;
+namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests\DependencyInjection;
 
-use Symfony\Bundle\CouchDBBundle\DependencyInjection\Configuration;
+use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
