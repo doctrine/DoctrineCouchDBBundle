@@ -12,7 +12,7 @@
 namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests\DependencyInjection;
 
 use Symfony\Bundle\DoctrineCouchDBBundle\Tests\TestCase;
-use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\CouchDBExtension;
+use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\DoctrineCouchDBExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -28,7 +28,7 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
     public function testClientOverrideDefaultConnection()
     {
         $container = $this->getContainer();
-        $loader = new CouchDBExtension();
+        $loader = new DoctrineCouchDBExtension();
 
         $loader->load(array(array(), array('client' => array('default_connection' => 'foo')), array()), $container);
 
@@ -39,7 +39,7 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
     public function testClients()
     {
         $container = $this->getContainer();
-        $loader = new CouchDBExtension();
+        $loader = new DoctrineCouchDBExtension();
 
         $loader->load(array(
             array(
@@ -57,7 +57,7 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
     public function testDocumentManagers()
     {
         $container = $this->getContainer();
-        $loader = new CouchDBExtension();
+        $loader = new DoctrineCouchDBExtension();
 
         $loader->load(array(
             array(
@@ -79,7 +79,7 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
     public function testMappings()
     {
         $container = $this->getContainer();
-        $loader = new CouchDBExtension();
+        $loader = new DoctrineCouchDBExtension();
 
         $loader->load(array(
             array(

@@ -26,7 +26,7 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
-class CouchDBExtension extends AbstractDoctrineExtension
+class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 {
     private $documentManagers;
 
