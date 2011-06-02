@@ -136,7 +136,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             $documentManager['connection'] = $this->defaultConnection;
         }
 
-        $def = $container->setDefinition(sprintf('doctrine_couchdb.odm.%s_connection.event_manager', $documentManager['name']), new DefinitionDecorator('doctrine.dbal.connection.event_manager'));
+        $def = $container->setDefinition(sprintf('doctrine_couchdb.odm.%s_connection.event_manager', $documentManager['name']), new DefinitionDecorator('doctrine_couchdb.odm.document_manager.event_manager'));
 
         $container
             ->setDefinition(sprintf('doctrine_couchdb.odm.%s_document_manager', $documentManager['name']), new DefinitionDecorator('doctrine_couchdb.odm.document_manager.abstract'))

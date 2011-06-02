@@ -18,6 +18,13 @@
         <parameter key="doctrine_couchdb.odm.cache.memcache_port">11211</parameter>
         <parameter key="doctrine_couchdb.odm.cache.memcache_instance.class">Memcache</parameter>
         <parameter key="doctrine_couchdb.odm.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
+
+        <parameter key="doctrine_couchdb.odm.metadata.driver_chain.class">Doctrine\ODM\CouchDB\Mapping\Driver\DriverChain</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.annotation.class">Doctrine\ODM\CouchDB\Mapping\Driver\AnnotationDriver</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.annotation_reader.class">Symfony\Bundle\DoctrineBundle\Annotations\IndexedReader</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.xml.class">Doctrine\ODM\CouchDB\Mapping\Driver\XmlDriver</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.yml.class">Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.php.class">Doctrine\ODM\CouchDB\Mapping\Driver\PHPDriver</parameter>
     </parameters>
 
     <services>
