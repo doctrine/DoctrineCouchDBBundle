@@ -12,8 +12,16 @@
 namespace Symfony\Bundle\DoctrineCouchDBBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass;
 
 class DoctrineCouchDBBundle extends Bundle
 {
-    
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterEventListenersAndSubscribersPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION);
+    }
 }
