@@ -2,6 +2,12 @@
 
 This bundle integrates Doctrine CouchDB ODM and Clients into Symfony2.
 
+## Installation
+
+* Grab this repository and [Doctrine CouchDB ODM](http://github.com/doctrine/couchdb-odm) into your Symfony project
+* Add `Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle` to your Kernel#registerBundles() method
+* Add autoloader for Doctrine\CouchDB, Doctrine\ODM\CouchDB and Doctrine\Bundle namespaces
+
 ## Configuration
 
 The configuration is similar to Doctrine ORM and MongoDB configuration for Symfony2 as its based
