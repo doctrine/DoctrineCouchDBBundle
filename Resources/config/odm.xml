@@ -28,6 +28,10 @@
     </parameters>
 
     <services>
+        <service id="doctrine_couchdb.odm.metadata.annotation_reader" class="%doctrine.orm.metadata.annotation_reader.class%" public="false">
+            <argument type="service" id="annotation_reader" />
+        </service>
+        
         <service
             id="doctrine_couchdb.odm.configuration"
             class="%doctrine_couchdb.odm.configuration.class%"

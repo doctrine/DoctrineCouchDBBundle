@@ -1,0 +1,51 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img width="28" height="28" alt="CouchDB" style="border-width: 0; vertical-align: middle; margin-right: 5px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sGFBUeCVNmlcQAAAOuSURBVEjH7Za7SytbFMZ/+5EQB3ygeYiKSkRFI0E7FWwsbMXCyr/B3tI/wkYEewsrwdZGVIIICikkCkoSDJqgxkdmRmfmFJcMGT3ee+65h1NczoLNHmbvNd9a6/vWni08z/P4jSb5zfYH8NcDftSM53l8T0e/Qlue56GFENze3rKxscHi4iJDQ0MAZDIZtra2mJiYYH5+nubmZlzX5fn5Gdd1aW5uplarcXZ2xvb2NlrrL4He3t5YWVkhHo/j77IsC9M0/U3RaJTl5WX6+/sBME2TnZ0dstksruvS1dXF4+MjtVqNtra2L8GEEDw8PPgV8gFt2+b29hbHcVBKkUwmfafHx0d2dnbI5XIopZBSUiqV/uJESjzPQwjxZRkb6dAAhmEwOztLKpX6rlO5XKZQKCCEwHVdAFpbW4nFYoTDYS4vL7FtGym/1mB9TVcqFQzDYG5uLhCVEMKf+/v7mZ6e5ujoiHg8Tl9fH729vfT29qK15vDwkP39fV5fX5FSBnzrVqlUkFKi4vH4qmEYdHZ2cnFxQSgUIhKJBECllMRiMZLJJOl0mpGREdrb21FKIYSgu7ubWCxGPp/HNE0ftDGBQqHAyckJKpVKrY6OjtLS0sLW1hahUIienh6/BHXQcDhMa2srTU1NgVLVOY9GowwODpLP57m/v8dxHF5eXlBKEQ6HfY2o6enpVdu2qVarXF1dcX5+zvj4OIZhBJTW2ItCCAqFAmtra+RyOUZHR9FaYxgG6XQaIQTZbBbLsmhqavKFZpomanJyctV1XYrFIo7jUC6X8TyP4eFhX4GNoI7jsLu7y+bmJtVqlWKxSLFYJJlMEolEkFIyMDDAzMwMlmVRKpXQWiOEoFaroaamplbr2SilMAyD6+trEokEHR0dPk8A+Xye9fV1jo+P0VqjlCIUCnF3d8fe3h4ADw8PFItFKpUKjuNwc3ODEMIH/HQ8KKV8PpeWlhgbG/PXDg4OqFarxONxn+NGVWYymUDPSSnRWgffNfLkOA6WZWFZFlprcrlcgLtkMklLS4sP4DgOtm1jmiamaeK6Lq7r4jgO7+/vvL294bpuQLGBDN/f33l6evJb4vT0lIWFBd8hkUhQq9WoVqufTpHGuf6slEJrHTgQPpW0HmWdj3K5TDQaBaCrqwspJbZt//zvqQ5QH/UI6yU7OzvzIw+FQiQSiUAm/zQ+fl+n0+m/jahUKgWynJqaIhKJ+FX4N9bT04P40Vvbx378WdM/uvG/Av25tf1/AL8BJnMMRmFAbJ0AAAAASUVORK5CYII=" />
+    {% endset %}
+    {% set text %}
+        <span title="{{ '%0.2f'|format(collector.totalDuration * 1000) }} ms">{{ collector.requestCount }}</span>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+<span class="label">
+    <span class="icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sGFBUeCVNmlcQAAAOuSURBVEjH7Za7SytbFMZ/+5EQB3ygeYiKSkRFI0E7FWwsbMXCyr/B3tI/wkYEewsrwdZGVIIICikkCkoSDJqgxkdmRmfmFJcMGT3ee+65h1NczoLNHmbvNd9a6/vWni08z/P4jSb5zfYH8NcDftSM53l8T0e/Qlue56GFENze3rKxscHi4iJDQ0MAZDIZtra2mJiYYH5+nubmZlzX5fn5Gdd1aW5uplarcXZ2xvb2NlrrL4He3t5YWVkhHo/j77IsC9M0/U3RaJTl5WX6+/sBME2TnZ0dstksruvS1dXF4+MjtVqNtra2L8GEEDw8PPgV8gFt2+b29hbHcVBKkUwmfafHx0d2dnbI5XIopZBSUiqV/uJESjzPQwjxZRkb6dAAhmEwOztLKpX6rlO5XKZQKCCEwHVdAFpbW4nFYoTDYS4vL7FtGym/1mB9TVcqFQzDYG5uLhCVEMKf+/v7mZ6e5ujoiHg8Tl9fH729vfT29qK15vDwkP39fV5fX5FSBnzrVqlUkFKi4vH4qmEYdHZ2cnFxQSgUIhKJBECllMRiMZLJJOl0mpGREdrb21FKIYSgu7ubWCxGPp/HNE0ftDGBQqHAyckJKpVKrY6OjtLS0sLW1hahUIienh6/BHXQcDhMa2srTU1NgVLVOY9GowwODpLP57m/v8dxHF5eXlBKEQ6HfY2o6enpVdu2qVarXF1dcX5+zvj4OIZhBJTW2ItCCAqFAmtra+RyOUZHR9FaYxgG6XQaIQTZbBbLsmhqavKFZpomanJyctV1XYrFIo7jUC6X8TyP4eFhX4GNoI7jsLu7y+bmJtVqlWKxSLFYJJlMEolEkFIyMDDAzMwMlmVRKpXQWiOEoFaroaamplbr2SilMAyD6+trEokEHR0dPk8A+Xye9fV1jo+P0VqjlCIUCnF3d8fe3h4ADw8PFItFKpUKjuNwc3ODEMIH/HQ8KKV8PpeWlhgbG/PXDg4OqFarxONxn+NGVWYymUDPSSnRWgffNfLkOA6WZWFZFlprcrlcgLtkMklLS4sP4DgOtm1jmiamaeK6Lq7r4jgO7+/vvL294bpuQLGBDN/f33l6evJb4vT0lIWFBd8hkUhQq9WoVqufTpHGuf6slEJrHTgQPpW0HmWdj3K5TDQaBaCrqwspJbZt//zvqQ5QH/UI6yU7OzvzIw+FQiQSiUAm/zQ+fl+n0+m/jahUKgWynJqaIhKJ+FX4N9bT04P40Vvbx378WdM/uvG/Av25tf1/AL8BJnMMRmFAbJ0AAAAASUVORK5CYII=" alt="" /></span>
+    <strong>Doctrine CouchDB</strong>
+    <span class="count">
+        <span>{{ collector.requestCount }}</span>
+        <span>{{ '%0.0f'|format(collector.totalDuration * 1000) }} ms</span>
+    </span>
+</span>
+{% endblock %}
+
+{% block panel %}
+    <h2>CouchDB HTTP Requests</h2>
+    
+    {% if not collector.requestCount %}
+        <p>
+            <em>No http requests to a CouchDB.</em>
+        </p>
+    {% else %}
+        {% for conn,requests in collector.requests %}
+            <h3>Database {{ conn }}</h3>
+            
+            <ul class="alt">
+            {% for i, request in requests %}
+                <li class="{{ i is odd ? 'odd' : 'even' }}">
+                    <div><strong>{{ request.method }}</strong> {{ request.path }}</div>
+                    <small>
+                        <strong>Status</strong>: {{ request.response_status }}<br />
+                        <strong>Duration</strong>: {{ '%0.2f'|format(request.duration * 1000) }} ms<br />
+                        <strong>Request-Size</strong>: {{ request.request_size }}
+                    </small>
+                    <div><code>{{ request.response|json_encode }}</code></div>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+    
+{% endblock %}

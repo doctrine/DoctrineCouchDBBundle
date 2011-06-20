@@ -78,6 +78,21 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
                 $connection,
             ))
         ;
+        
+        if (isset($connection['logging']) && $connection['logging'] === true) {
+            $def = new Definition('Doctrine\CouchDB\HTTP\Client');
+            $def->setFactoryService(sprintf('doctrine_couchdb.client.%s_connection', $name));
+            $def->setFactoryMethod('getHttpClient');
+            $def->setPublic(false);
+
+            $container->setDefinition(sprintf('doctrine_couchdb.httpclient.%s_client', $name), $def);
+        
+            $def = $container->getDefinition('doctrine_couchdb.datacollector');
+            $def->addMethodCall('addLoggingClient', array(
+                new Reference(sprintf('doctrine_couchdb.httpclient.%s_client', $name)),
+                $name
+            ));
+        }
     }
 
     private function odmLoad($config, $container)
