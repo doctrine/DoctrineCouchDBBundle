@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests\DependencyInjection;
+namespace Doctrine\Bundle\CouchDBBundle\Tests\DependencyInjection;
 
-use Symfony\Bundle\DoctrineCouchDBBundle\Tests\TestCase;
-use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\DoctrineCouchDBExtension;
+use Doctrine\Bundle\CouchDBBundle\Tests\TestCase;
+use Doctrine\Bundle\CouchDBBundle\DependencyInjection\DoctrineCouchDBExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;

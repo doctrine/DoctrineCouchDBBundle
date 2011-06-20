@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection;
+namespace Doctrine\Bundle\CouchDBBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -235,7 +235,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
     protected function getMappingObjectDefaultName()
     {
-        return 'CouchDocument';
+        return 'Document';
     }
 
     protected function getMappingResourceConfigDirectory()
@@ -245,6 +245,6 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
     protected function getMappingResourceExtension()
     {
-        return 'couch';
+        return 'couchdb';
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests;
+namespace Doctrine\Bundle\CouchDBBundle\Tests;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {

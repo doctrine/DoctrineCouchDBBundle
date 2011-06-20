@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle;
+namespace Doctrine\Bundle\CouchDBBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass;
+use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass;
 
 class DoctrineCouchDBBundle extends Bundle
 {

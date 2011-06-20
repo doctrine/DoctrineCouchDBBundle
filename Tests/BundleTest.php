@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests;
+namespace Doctrine\Bundle\CouchDBBundle\Tests;
 
-use Symfony\Bundle\DoctrineCouchDBBundle\DoctrineCouchDBBundle;
+use Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 class BundleTest extends TestCase
@@ -23,7 +23,7 @@ class BundleTest extends TestCase
         $builder->expects($this->once())
                 ->method('addCompilerPass')
                 ->with(
-                    $this->isInstanceOf('Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass'),
+                    $this->isInstanceOf('Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass'),
                     $this->equalTo(PassConfig::TYPE_BEFORE_OPTIMIZATION)
                 );
 

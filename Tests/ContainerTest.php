@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bundle\DoctrineCouchDBBundle\Tests;
+namespace Doctrine\Bundle\CouchDBBundle\Tests;
 
 use Symfony\Bundle\DoctrineBundle\Annotations\IndexedReader;
 
@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Compiler\ResolveDefinitionTemplatesPass;
-use Symfony\Bundle\DoctrineCouchDBBundle\DependencyInjection\DoctrineCouchDBExtension;
+use Doctrine\Bundle\CouchDBBundle\DependencyInjection\DoctrineCouchDBExtension;
 
 class ContainerTest extends TestCase
 {
