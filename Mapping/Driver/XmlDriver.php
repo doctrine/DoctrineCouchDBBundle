@@ -21,29 +21,29 @@ use Doctrine\ODM\CouchDB\Mapping\Driver\XmlDriver as BaseXmlDriver;
  */
 class XmlDriver extends BaseXmlDriver
 {
-    protected $_prefixes = array();
-    protected $_globalBasename;
-    protected $_classCache;
-    protected $_fileExtension = '.couchdb.xml';
+    protected $prefixes = array();
+    protected $globalBasename;
+    protected $classCache;
+    protected $fileExtension = '.couchdb.xml';
 
     public function setGlobalBasename($file)
     {
-        $this->_globalBasename = $file;
+        $this->globalBasename = $file;
     }
 
     public function getGlobalBasename()
     {
-        return $this->_globalBasename;
+        return $this->globalBasename;
     }
 
     public function setNamespacePrefixes($prefixes)
     {
-        $this->_prefixes = $prefixes;
+        $this->prefixes = $prefixes;
     }
 
     public function getNamespacePrefixes()
     {
-        return $this->_prefixes;
+        return $this->prefixes;
     }
 
     public function isTransient($className)
@@ -53,14 +53,14 @@ class XmlDriver extends BaseXmlDriver
 
     public function getAllClassNames()
     {
-        if (null === $this->_classCache) {
+        if (null === $this->classCache) {
             $this->initialize();
         }
 
         $classes = array();
 
-        if ($this->_paths) {
-            foreach ((array) $this->_paths as $path) {
+        if ($this->paths) {
+            foreach ((array) $this->paths as $path) {
                 if (!is_dir($path)) {
                     throw MappingException::fileMappingDriversRequireConfiguredDirectoryPath($path);
                 }
@@ -71,15 +71,15 @@ class XmlDriver extends BaseXmlDriver
                 );
 
                 foreach ($iterator as $file) {
-                    $fileName = $file->getBasename($this->_fileExtension);
+                    $fileName = $file->getBasename($this->fileExtension);
 
-                    if ($fileName == $file->getBasename() || $fileName == $this->_globalBasename) {
+                    if ($fileName == $file->getBasename() || $fileName == $this->globalBasename) {
                         continue;
                     }
 
                     // NOTE: All files found here means classes are not transient!
-                    if (isset($this->_prefixes[$path])) {
-                        $classes[] = $this->_prefixes[$path].'\\'.str_replace('.', '\\', $fileName);
+                    if (isset($this->prefixes[$path])) {
+                        $classes[] = $this->prefixes[$path].'\\'.str_replace('.', '\\', $fileName);
                     } else {
                         $classes[] = str_replace('.', '\\', $fileName);
                     }
@@ -87,39 +87,39 @@ class XmlDriver extends BaseXmlDriver
             }
         }
 
-        return array_merge($classes, array_keys($this->_classCache));
+        return array_merge($classes, array_keys($this->classCache));
     }
 
     public function getElement($className)
     {
-        if (null === $this->_classCache) {
+        if (null === $this->classCache) {
             $this->initialize();
         }
 
-        if (!isset($this->_classCache[$className])) {
-            $this->_classCache[$className] = parent::getElement($className);
+        if (!isset($this->classCache[$className])) {
+            $this->classCache[$className] = parent::getElement($className);
         }
 
-        return $this->_classCache[$className];
+        return $this->classCache[$className];
     }
 
     protected function initialize()
     {
-        $this->_classCache = array();
-        if (null !== $this->_globalBasename) {
-            foreach ($this->_paths as $path) {
-                if (file_exists($file = $path.'/'.$this->_globalBasename.$this->_fileExtension)) {
-                    $this->_classCache = array_merge($this->_classCache, $this->_loadMappingFile($file));
+        $this->classCache = array();
+        if (null !== $this->globalBasename) {
+            foreach ($this->paths as $path) {
+                if (file_exists($file = $path.'/'.$this->globalBasename.$this->fileExtension)) {
+                    $this->classCache = array_merge($this->classCache, $this->loadMappingFile($file));
                 }
             }
         }
     }
 
-    protected function _findMappingFile($className)
+    protected function findMappingFile($className)
     {
-        $defaultFileName = str_replace('\\', '.', $className) . $this->_fileExtension;
-        foreach ($this->_paths as $path) {
-            if (!isset($this->_prefixes[$path])) {
+        $defaultFileName = str_replace('\\', '.', $className) . $this->fileExtension;
+        foreach ($this->paths as $path) {
+            if (!isset($this->prefixes[$path])) {
                 if (file_exists($path . DIRECTORY_SEPARATOR . $defaultFileName)) {
                     return $path . DIRECTORY_SEPARATOR . $defaultFileName;
                 }
@@ -127,13 +127,13 @@ class XmlDriver extends BaseXmlDriver
                 continue;
             }
 
-            $prefix = $this->_prefixes[$path];
+            $prefix = $this->prefixes[$path];
 
             if (0 !== strpos($className, $prefix.'\\')) {
                 continue;
             }
 
-            $filename = $path.'/'.strtr(substr($className, strlen($prefix)+1), '\\', '.').$this->_fileExtension;
+            $filename = $path.'/'.strtr(substr($className, strlen($prefix)+1), '\\', '.').$this->fileExtension;
             if (file_exists($filename)) {
                 return $filename;
             }
@@ -141,6 +141,6 @@ class XmlDriver extends BaseXmlDriver
             throw MappingException::mappingFileNotFound($className, $filename);
         }
 
-        throw MappingException::mappingFileNotFound($className, substr($className, strrpos($className, '\\') + 1).$this->_fileExtension);
+        throw MappingException::mappingFileNotFound($className, substr($className, strrpos($className, '\\') + 1).$this->fileExtension);
     }
 }
