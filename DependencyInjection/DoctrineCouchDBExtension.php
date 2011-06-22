@@ -29,6 +29,8 @@ use Symfony\Component\Config\Definition\Processor;
 class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 {
     private $documentManagers;
+    
+    private $bundleDirs = array();
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -146,7 +148,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
         foreach ($methods as $method => $arg) {
             $odmConfigDef->addMethodCall($method, array($arg));
         }
-
+        
         if (!isset($documentManager['connection'])) {
             $documentManager['connection'] = $this->defaultConnection;
         }
@@ -162,15 +164,34 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             ))
         ;
     }
+    
+    protected function getMappingDriverBundleConfigDefaults(array $bundleConfig, \ReflectionClass $bundle, ContainerBuilder $container)
+    {        
+        $this->bundleDirs[] = dirname($bundle->getFileName());
+        
+        return parent::getMappingDriverBundleConfigDefaults($bundleConfig, $bundle, $container);
+    }
+    
 
     protected function loadOdmDocumentManagerMappingInformation(array $documentManager, Definition $odmConfig, ContainerBuilder $container)
     {
         // reset state of drivers and alias map. They are only used by this methods and children.
         $this->drivers = array();
         $this->aliasMap = array();
+        $this->bundleDirs = array();
 
         $this->loadMappingInformation($documentManager, $container);
         $this->registerMappingDrivers($documentManager, $container);
+        
+        foreach ($this->bundleDirs AS $bundleDir) {
+            if (is_dir($bundleDir."/Resources/couchdb/" . $documentManager['name'])) {
+                $odmConfig->addMethodCall('addDesignDocument', array(
+                    $documentManager['view_name'],
+                    'Doctrine\CouchDB\View\FolderDesignDocument',
+                    array($bundleDir."/Resources/couchdb/" . $documentManager['name'])
+                ));
+            }
+        }
 
         $odmConfig->addMethodCall('setDocumentNamespaces', array($this->aliasMap));
     }

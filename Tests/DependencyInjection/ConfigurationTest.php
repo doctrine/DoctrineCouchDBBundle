@@ -115,6 +115,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'design_documents' => array(),
                         'lucene_handler_name' => false,
                         'uuid_buffer_size' => 20,
+                        'view_name' => 'symfony',
                         'all_or_nothing_flush' => true,
                     ),
                 ),
@@ -152,6 +153,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'design_documents' => array(),
                         'lucene_handler_name' => false,
                         'uuid_buffer_size' => 20,
+                        'view_name' => 'symfony',
                         'all_or_nothing_flush' => true,
                     ),
                     'test2' => array(
@@ -161,6 +163,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'design_documents' => array(),
                         'lucene_handler_name' => false,
                         'uuid_buffer_size' => 20,
+                        'view_name' => 'symfony',
                         'all_or_nothing_flush' => true,
                     ),
                 ),

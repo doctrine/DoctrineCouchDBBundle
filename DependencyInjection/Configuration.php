@@ -128,7 +128,7 @@ class Configuration implements ConfigurationInterface
                                 'metadata_cache_driver', 'metadata-cache-driver',
                                 'auto_mapping', 'auto-mapping',
                                 'mappings', 'mapping',
-                                'connection'
+                                'connection',
                             ) as $key) {
                                 if (array_key_exists($key, $v)) {
                                     $documentManagers[$key] = $v[$key];
@@ -204,6 +204,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->scalarNode('lucene_handler_name')->defaultFalse()->end()
                     ->scalarNode('uuid_buffer_size')->defaultValue(20)->end()
+                    ->scalarNode('view_name')->defaultValue('symfony')->end()
                     ->booleanNode('all_or_nothing_flush')->defaultTrue()->end()
                 ->end()
             ->end()
