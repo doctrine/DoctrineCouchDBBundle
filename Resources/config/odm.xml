@@ -18,6 +18,7 @@
         <parameter key="doctrine_couchdb.odm.cache.memcache_port">11211</parameter>
         <parameter key="doctrine_couchdb.odm.cache.memcache_instance.class">Memcache</parameter>
         <parameter key="doctrine_couchdb.odm.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
+        <parameter key="doctrine_couchdb.odm.proxy_cache_warmer.class">Doctrine\Bundle\CouchDBBundle\CacheWarmer\ProxyCacheWarmer</parameter>
 
         <parameter key="doctrine_couchdb.odm.metadata.driver_chain.class">Doctrine\ODM\CouchDB\Mapping\Driver\DriverChain</parameter>
         <parameter key="doctrine_couchdb.odm.metadata.annotation.class">Doctrine\ODM\CouchDB\Mapping\Driver\AnnotationDriver</parameter>
@@ -30,6 +31,11 @@
     <services>
         <service id="doctrine_couchdb.odm.metadata.annotation_reader" class="%doctrine_couchdb.odm.metadata.annotation_reader.class%" public="false">
             <argument type="service" id="annotation_reader" />
+        </service>
+        
+        <service id="doctrine_couchdb.odm.proxy_cache_warmer" class="%doctrine_couchdb.odm.proxy_cache_warmer.class%" public="false">
+            <tag name="kernel.cache_warmer" />
+            <argument type="service" id="service_container" />
         </service>
         
         <service

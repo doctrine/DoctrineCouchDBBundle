@@ -188,7 +188,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
                 $odmConfig->addMethodCall('addDesignDocument', array(
                     $documentManager['view_name'],
                     'Doctrine\CouchDB\View\FolderDesignDocument',
-                    array($bundleDir."/Resources/couchdb/" . $documentManager['name'])
+                    $bundleDir."/Resources/couchdb/" . $documentManager['name']
                 ));
             }
         }
