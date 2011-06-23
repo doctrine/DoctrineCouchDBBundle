@@ -41,7 +41,8 @@
                         <strong>Duration</strong>: {{ '%0.2f'|format(request.duration * 1000) }} ms<br />
                         <strong>Request-Size</strong>: {{ request.request_size }}
                     </small>
-                    <div><code>{{ request.response|json_encode }}</code></div>
+                    <div style="border:1px solid #000; padding: 4px; margin: 4px; overflow: auto;"><small>Request-Body</small><br /> {% if request.request is not empty %}<pre><code>{{ request.request|json_encode }}</code></pre>{% else %}Empty{% endif %}</div>
+                    <div style="border:1px solid #000; padding: 4px; margin: 4px; overflow: auto;"><small>Response-Body</small><br /><pre><code>{{ request.response|json_encode }}</code></pre></div>
                 </li>
             {% endfor %}
             </ul>
