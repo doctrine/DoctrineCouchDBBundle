@@ -56,5 +56,11 @@
             abstract="true"
             class="%doctrine_couchdb.odm.document_manager.event_manager.class%"
         />
+
+        <service id="form.type.couchdb.document" class="Doctrine\Bundle\CouchDBBundle\Form\Type\DocumentType">
+            <tag name="form.type" alias="couchdb_document" />
+            <argument type="service" id="doctrine_couchdb" />
+        </service>
+
     </services>
 </container>
