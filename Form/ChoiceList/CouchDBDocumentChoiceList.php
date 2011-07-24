@@ -34,6 +34,7 @@ class CouchDBDocumentChoiceList extends PersistentObjectChoiceList
             throw new FormException('Documents passed to the choice field must be managed in the Document Manager.');
         }
 
-        return $this->objectManager->getUnitOfWork()->getDocumentIdentifier($object);
+        // has to be array of
+        return array($this->objectManager->getUnitOfWork()->getDocumentIdentifier($object));
     }
 }

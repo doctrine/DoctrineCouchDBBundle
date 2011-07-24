@@ -167,7 +167,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
     
     protected function getMappingDriverBundleConfigDefaults(array $bundleConfig, \ReflectionClass $bundle, ContainerBuilder $container)
     {        
-        $this->bundleDirs[] = dirname($bundle->getFileName());
+        $this->bundleDirs[$bundle->getNamespaceName()] = dirname($bundle->getFileName());
         
         return parent::getMappingDriverBundleConfigDefaults($bundleConfig, $bundle, $container);
     }
@@ -182,16 +182,27 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
         $this->loadMappingInformation($documentManager, $container);
         $this->registerMappingDrivers($documentManager, $container);
-        
-        foreach ($this->bundleDirs AS $bundleDir) {
-            if (is_dir($bundleDir."/Resources/couchdb/" . $documentManager['name'])) {
-                $odmConfig->addMethodCall('addDesignDocument', array(
-                    $documentManager['view_name'],
-                    'Doctrine\CouchDB\View\FolderDesignDocument',
-                    $bundleDir."/Resources/couchdb/" . $documentManager['name']
-                ));
+
+        // This looks scary but essentially finds the right document manager for any registered/mapped bundle
+        // and then registers any potential CouchDB views with that document manager.
+        foreach ($this->aliasMap AS $alias => $prefix) {
+            foreach ($this->bundleDirs AS $bundleNamespace => $bundleDir) {                
+                if (strpos($prefix, $bundleNamespace) === 0 && file_exists($bundleDir."/Resources/couchdb")) {
+                    $it = new \DirectoryIterator($bundleDir."/Resources/couchdb");
+                    foreach ($it AS $res) {
+                        if ($res->isDir() && !$res->isDot()) {
+                            $odmConfig->addMethodCall('addDesignDocument', array(
+                                $res->getBasename(),
+                                'Doctrine\CouchDB\View\FolderDesignDocument',
+                                $bundleDir."/Resources/couchdb/" . $res->getBasename()
+                            ));
+                            
+                        }
+                    }
+                }
             }
         }
+
 
         $odmConfig->addMethodCall('setDocumentNamespaces', array($this->aliasMap));
     }

@@ -38,3 +38,21 @@ You can access to CouchDB services:
         }
     }
 
+## View directories
+
+In `@YourBundle/Resources/couchdb/` you can add design documents and corresponding views and have Doctrine
+CouchDB register them up automatically. For example if you had a design doc "foo" and a view "bar" you could
+add the following files and directories:
+
+    Resources/couchdb/
+    └── foo/
+        └── views/
+            └── bar/
+                ├── map.js
+                └── reduce.js
+
+You can then update this design document from the CLI by calling:
+
+    ./app/console doctrine:couchdb:update-design-doc foo
+
+Where `foo` is the name of the design document.
