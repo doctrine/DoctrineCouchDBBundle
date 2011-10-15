@@ -12,13 +12,13 @@
 namespace Doctrine\Bundle\CouchDBBundle\Form;
 
 use Symfony\Component\Form\AbstractExtension;
-use Doctrine\Bundle\CouchDBBundle\PersistenceRegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 class DoctrineCouchDBExtension extends AbstractExtension
 {
     protected $registry;
 
-    public function __construct(PersistenceRegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
     }
