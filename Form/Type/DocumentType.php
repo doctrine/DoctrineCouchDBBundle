@@ -32,7 +32,7 @@ class DocumentType extends PersistentObjectType
     protected function createDefaultChoiceList($options)
     {
         return new CouchDBDocumentChoiceList(
-            $this->registry->getObjectManager($options['dm']),
+            $this->registry->getManager($options['dm']),
             $options['class'],
             $options['property'],
             $options['choices']
