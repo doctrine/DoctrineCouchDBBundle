@@ -12,7 +12,7 @@
         <parameter key="doctrine_couchdb.connections" type="collection" />
         <parameter key="doctrine_couchdb.document_managers" type="collection" />
         <parameter key="doctrine_couchdb.default_connection"></parameter>
-        <parameter key="doctrine_couchdb.default_connection"></parameter>
+        <parameter key="doctrine_couchdb.default_document_manager"></parameter>
     </parameters>
 
     <services>
