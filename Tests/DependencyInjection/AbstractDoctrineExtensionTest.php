@@ -96,7 +96,7 @@ abstract class AbstractDoctrineExtensionTest extends TestCase
         $this->assertTrue($container->has('doctrine_couchdb.odm.test_metadata_driver'));
 
         $methodCalls = $container->getDefinition('doctrine_couchdb.odm.test_metadata_driver')->getMethodCalls();
-        $this->assertArrayHasKey(0, $methodCalls);
+        $this->assertArrayHasKey(0, $methodCalls, "No method calls to define metadata driver found.");
         $this->assertEquals('addDriver', $methodCalls[0][0]);
         $this->assertEquals('Fixtures\Bundles\YamlBundle\CouchDocument', $methodCalls[0][1][1]);
         $this->assertEquals(new Reference('doctrine_couchdb.odm.test_yml_metadata_driver'), $methodCalls[0][1][0]);

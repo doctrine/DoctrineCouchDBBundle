@@ -8,6 +8,10 @@ This bundle integrates Doctrine CouchDB ODM and Clients into Symfony2.
 * Add `Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle` to your Kernel#registerBundles() method
 * Add autoloader for Doctrine\CouchDB, Doctrine\ODM\CouchDB and Doctrine\Bundle namespaces
 
+## Documentation
+
+See the [Doctrine CouchDB ODM](http://www.doctrine-project.org/docs/couchdb_odm/1.0/en/) documentation for more information.
+
 ## Configuration
 
 The configuration is similar to Doctrine ORM and MongoDB configuration for Symfony2 as its based
@@ -18,6 +22,24 @@ on the AbstractDoctrineBundle aswell:
         dbname: symfony
       odm:
         auto_mapping: true
+
+## Annotations
+
+An example of how to use annotations with CouchDB and Symfony:
+
+    <?php
+    namespace Acme\DemoBundle\CouchDocument;
+
+    use Doctrine\ODM\CouchDB\Mapping\Annotations as CouchDB;
+
+    /**
+     * @CouchDB\Document
+     */
+    class User
+    {
+        /** @CouchDB\Id */
+        private $id;
+    }
 
 ## Services
 

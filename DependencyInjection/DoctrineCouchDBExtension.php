@@ -29,7 +29,7 @@ use Symfony\Component\Config\Definition\Processor;
 class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 {
     private $documentManagers;
-    
+
     private $bundleDirs = array();
 
     public function load(array $configs, ContainerBuilder $container)
@@ -80,7 +80,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
                 $connection,
             ))
         ;
-        
+
         if (isset($connection['logging']) && $connection['logging'] === true) {
             $def = new Definition('Doctrine\CouchDB\HTTP\Client');
             $def->setFactoryService(sprintf('doctrine_couchdb.client.%s_connection', $name));
@@ -88,7 +88,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             $def->setPublic(false);
 
             $container->setDefinition(sprintf('doctrine_couchdb.httpclient.%s_client', $name), $def);
-        
+
             $def = $container->getDefinition('doctrine_couchdb.datacollector');
             $def->addMethodCall('addLoggingClient', array(
                 new Reference(sprintf('doctrine_couchdb.httpclient.%s_client', $name)),
@@ -148,7 +148,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
         foreach ($methods as $method => $arg) {
             $odmConfigDef->addMethodCall($method, array($arg));
         }
-        
+
         if (!isset($documentManager['connection'])) {
             $documentManager['connection'] = $this->defaultConnection;
         }
@@ -164,14 +164,14 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             ))
         ;
     }
-    
+
     protected function getMappingDriverBundleConfigDefaults(array $bundleConfig, \ReflectionClass $bundle, ContainerBuilder $container)
-    {        
+    {
         $this->bundleDirs[] = dirname($bundle->getFileName());
-        
+
         return parent::getMappingDriverBundleConfigDefaults($bundleConfig, $bundle, $container);
     }
-    
+
 
     protected function loadOdmDocumentManagerMappingInformation(array $documentManager, Definition $odmConfig, ContainerBuilder $container)
     {
@@ -182,7 +182,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
         $this->loadMappingInformation($documentManager, $container);
         $this->registerMappingDrivers($documentManager, $container);
-        
+
         foreach ($this->bundleDirs AS $bundleDir) {
             if (is_dir($bundleDir."/Resources/couchdb/" . $documentManager['name'])) {
                 $odmConfig->addMethodCall('addDesignDocument', array(
@@ -271,7 +271,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
     protected function getMappingObjectDefaultName()
     {
-        return 'Document';
+        return 'CouchDocument';
     }
 
     protected function getMappingResourceConfigDirectory()
