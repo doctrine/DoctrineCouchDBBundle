@@ -8,6 +8,11 @@
     <parameters>
         <parameter key="doctrine_couchdb.client.connection.class">Doctrine\CouchDB\CouchDBClient</parameter>
         <parameter key="doctrine_couchdb.datacollector.class">Doctrine\Bundle\CouchDBBundle\DataCollector\CouchDBDataCollector</parameter>
+        <parameter key="doctrine_couchdb.couchdb.class">Doctrine\Bundle\CouchDBBundle\CouchDBRegistry</parameter>
+        <parameter key="doctrine_couchdb.connections" type="collection" />
+        <parameter key="doctrine_couchdb.document_managers" type="collection" />
+        <parameter key="doctrine_couchdb.default_connection"></parameter>
+        <parameter key="doctrine_couchdb.default_connection"></parameter>
     </parameters>
 
     <services>
@@ -19,6 +24,14 @@
         />
         <service id="doctrine_couchdb.datacollector" class="%doctrine_couchdb.datacollector.class%">
             <tag name="data_collector" template="DoctrineCouchDBBundle:Collector:couchdb" id="couchdb" />
+        </service>
+
+        <service id="doctrine_couchdb" class="%doctrine_couchdb.couchdb.class%">
+            <argument type="service" id="service_container" />
+            <argument>%doctrine_couchdb.connections%</argument>
+            <argument>%doctrine_couchdb.document_managers%</argument>
+            <argument>%doctrine_couchdb.default_connection%</argument>
+            <argument>%doctrine_couchdb.default_document_manager%</argument>
         </service>
     </services>
 </container>
