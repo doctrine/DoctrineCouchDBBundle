@@ -2,6 +2,8 @@
 
 This bundle integrates Doctrine CouchDB ODM and Clients into Symfony2.
 
+STABILITY: Alpha
+
 ## Installation
 
 * Grab this repository and [Doctrine CouchDB ODM](http://github.com/doctrine/couchdb-odm) into your Symfony project
