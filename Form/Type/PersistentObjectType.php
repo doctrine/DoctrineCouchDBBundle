@@ -17,7 +17,7 @@ namespace Doctrine\Bundle\CouchDBBundle\Form\Type;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Doctrine\Bundle\CouchDBBundle\PersistenceRegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\CouchDBBundle\ChoiceList\EntityChoiceList;
 use Doctrine\Bundle\CouchDBBundle\Form\EventListener\MergeCollectionListener;
 use Doctrine\Bundle\CouchDBBundle\Form\DataTransformer\PersistentObjectToArrayTransformer;
@@ -27,7 +27,7 @@ abstract class PersistentObjectType extends AbstractType
 {
     protected $registry;
 
-    public function __construct(PersistenceRegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
     }
@@ -67,7 +67,7 @@ abstract class PersistentObjectType extends AbstractType
         if (!isset($options['choice_list'])) {
             $defaultOptions['choice_list'] = $this->createDefaultChoiceList($options);
             /*new EntityChoiceList(
-                $this->registry->getObjectManager($options['em']),
+                $this->registry->getManager($options['em']),
                 $options['class'],
                 $options['property'],
                 $options['query_builder'],
