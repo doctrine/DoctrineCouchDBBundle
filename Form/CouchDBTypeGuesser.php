@@ -98,11 +98,14 @@ class CouchDBTypeGuesser implements FormTypeGuesserInterface
 
     protected function getMetadata($class)
     {
-        if (isset($this->cache[$class])) {
+        if (array_key_exists($class, $this->cache)) {
             return $this->cache[$class];
         }
 
         $manager = $this->registry->getManagerForClass($class);
-        return $this->cache[$class] = array($manager->getClassMetadata($class), $manager);
+        if ($manager) {
+            return $this->cache[$class] = array($manager->getClassMetadata($class), $manager);
+        }
+        return $this->cache[$class] = null;
     }
 }
