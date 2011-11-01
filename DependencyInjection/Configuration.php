@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('doctrine_couchdb');
+        $rootNode = $treeBuilder->root('doctrine_couch_db');
 
         $this->addClientSection($rootNode);
         $this->addOdmSection($rootNode);
