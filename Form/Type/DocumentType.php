@@ -31,8 +31,9 @@ class DocumentType extends PersistentObjectType
      */
     protected function createDefaultChoiceList($options)
     {
+        $documentManager = is_object($options['dm']) ?: $this->registry->getManager($options['dm']);
         return new CouchDBDocumentChoiceList(
-            $this->registry->getManager($options['dm']),
+            $documentManager,
             $options['class'],
             $options['property'],
             $options['choices']
@@ -41,6 +42,6 @@ class DocumentType extends PersistentObjectType
 
     public function getName()
     {
-        return 'couchdb_document';
+        return 'doctrine_couchdb_document';
     }
 }

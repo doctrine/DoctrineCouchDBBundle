@@ -66,13 +66,6 @@ abstract class PersistentObjectType extends AbstractType
 
         if (!isset($options['choice_list'])) {
             $defaultOptions['choice_list'] = $this->createDefaultChoiceList($options);
-            /*new EntityChoiceList(
-                $this->registry->getManager($options['em']),
-                $options['class'],
-                $options['property'],
-                $options['query_builder'],
-                $options['choices']
-            );*/
         }
 
         return $defaultOptions;
