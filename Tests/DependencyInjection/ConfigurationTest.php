@@ -28,7 +28,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testEmptyConfig()
     {
         $this->setExpectedException('Symfony\Component\Config\Definition\Exception\InvalidConfigurationException',
-            'The child node "client" at path "doctrine_couchdb" must be configured.');
+            'The child node "client" at path "doctrine_couch_db" must be configured.');
         $config = $this->processor->processConfiguration($this->config, array());
     }
 

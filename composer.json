@@ -1,6 +1,6 @@
 {
     "name": "doctrine/couchdb-odm-bundle",
-    "type": "library",
+    "type": "symfony-bundle",
     "description": "Symfony2 Doctrine CouchDB Bundle",
     "keywords": ["persistence", "couchdb", "symfony"],
     "homepage": "http://www.doctrine-project.org",
@@ -11,7 +11,12 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "doctrine/couchdb-odm": ">=2.2.0",
-        "symfony/framework-bundle": ">=2.1.0"
-    }
+        "doctrine/couchdb-odm": ">=2.0",
+        "symfony/symfony": "2.1-dev",
+        "symfony/doctrine-bridge": "2.1-dev"
+    },
+    "autoload": {
+        "psr-0": { "Doctrine\\Bundle\\DoctrineCouchDBBundle": "" }
+    },
+    "target-dir": "Doctrine/Bundle/DoctrineCouchDBBundle"
 }

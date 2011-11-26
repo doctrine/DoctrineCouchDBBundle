@@ -16,14 +16,21 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 class BundleTest extends TestCase
 {
-    public function testRegisterEventListener()
+    public function testRegisterCompilerPasses()
     {
         $bundle = new DoctrineCouchDBBundle();
         $builder = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
-        $builder->expects($this->once())
+        
+        $builder->expects($this->at(0))
                 ->method('addCompilerPass')
                 ->with(
                     $this->isInstanceOf('Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass'),
+                    $this->equalTo(PassConfig::TYPE_BEFORE_OPTIMIZATION)
+                );
+        $builder->expects($this->at(1))
+                ->method('addCompilerPass')
+                ->with(
+                    $this->isInstanceOf('Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\DoctrineValidationPass'),
                     $this->equalTo(PassConfig::TYPE_BEFORE_OPTIMIZATION)
                 );
 
