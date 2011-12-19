@@ -20,6 +20,9 @@
         <parameter key="doctrine_couchdb.odm.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
         <parameter key="doctrine_couchdb.odm.proxy_cache_warmer.class">Doctrine\Bundle\CouchDBBundle\CacheWarmer\ProxyCacheWarmer</parameter>
 
+        <!-- security -->
+        <parameter key="doctrine_couchdb.odm.user_provider.class">Symfony\Bridge\Doctrine\Security\User\EntityUserProvider</parameter>
+
         <!-- form field factory guesser -->
         <parameter key="form.type_guesser.doctrine_couchdb.class">Doctrine\Bundle\CouchDBBundle\Form\CouchDBTypeGuesser</parameter>
 
@@ -79,6 +82,11 @@
 
         <service id="doctrine_couchdb.odm.validator_initializer" class="%doctrine_couchdb.odm.validator_initializer.class%">
             <tag name="validator.initializer" />
+            <argument type="service" id="doctrine_couchdb" />
+        </service>
+
+        <!-- security -->
+        <service id="doctrine_couchdb.odm.security.user.provider" class="%doctrine.orm.security.user.provider.class%" abstract="true" public="false">
             <argument type="service" id="doctrine_couchdb" />
         </service>
 

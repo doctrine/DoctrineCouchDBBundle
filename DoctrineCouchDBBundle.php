@@ -19,12 +19,17 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass;
 use Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\DoctrineValidationPass;
+use Symfony\Bridge\Doctrine\DependencyInjection\Security\UserProvider\EntityFactory;
 
 class DoctrineCouchDBBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+
+        if ($container->hasExtension('security')) {
+            $container->getExtension('security')->addUserProviderFactory(new EntityFactory('couchdb', 'doctrine_couchdb.odm.security.user.provider'));
+        }
 
         $container->addCompilerPass(new RegisterEventListenersAndSubscribersPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION);
         $container->addCompilerPass(new DoctrineValidationPass('couchdb'));
@@ -35,7 +40,7 @@ class DoctrineCouchDBBundle extends Bundle
         // force Doctrine annotations to be loaded
         // should be removed when a better solution is found in Doctrine
         class_exists('Doctrine\ODM\CouchDB\Mapping\Driver\AnnotationDriver');
-        
+
         // Register an autoloader for proxies to avoid issues when unserializing them
         // when the ORM is used.
         if ($this->container->hasParameter('doctrine_couchdb.odm.proxy_namespace')) {
