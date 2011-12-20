@@ -34,6 +34,6 @@ class DocumentType extends DoctrineType
 
     public function getName()
     {
-        return 'doctrine_couchdb_document';
+        return 'couchdb_document';
     }
 }
