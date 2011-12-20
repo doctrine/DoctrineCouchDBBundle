@@ -20,12 +20,11 @@
 
 namespace Doctrine\Bundle\CouchDBBundle\Form;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
-use Doctrine\ORM\Mapping\MappingException;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 /**
  * Guesser for Form component using Doctrine CouchDB registry and metadata.
