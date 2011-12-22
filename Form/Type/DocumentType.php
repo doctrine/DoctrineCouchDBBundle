@@ -14,34 +14,26 @@
 
 namespace Doctrine\Bundle\CouchDBBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\AbstractType;
-use Doctrine\Bundle\CouchDBBundle\Form\ChoiceList\CouchDBDocumentChoiceList;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bridge\Doctrine\Form\Type\DoctrineType;
+use Symfony\Component\Form\Exception\FormException;
 
-class DocumentType extends PersistentObjectType
+class DocumentType extends DoctrineType
 {
-    protected function getObjectManagerKey()
-    {
-        return 'dm';
-    }
-
     /**
-     * @return PersistentObjectChoiceList
+     * Return the loader object.
+     *
+     * @param ObjectManager $manager
+     * @param array $options
+     * @return EntityLoaderInterface
      */
-    protected function createDefaultChoiceList($options)
+    protected function getLoader(ObjectManager $manager, array $options)
     {
-        $documentManager = is_object($options['dm']) ?: $this->registry->getManager($options['dm']);
-        return new CouchDBDocumentChoiceList(
-            $documentManager,
-            $options['class'],
-            $options['property'],
-            $options['choices']
-        );
+        throw new FormException('The query builder option is not supported by CouchDB.');
     }
 
     public function getName()
     {
-        return 'doctrine_couchdb_document';
+        return 'couchdb_document';
     }
 }

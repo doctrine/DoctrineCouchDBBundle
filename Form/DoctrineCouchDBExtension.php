@@ -29,4 +29,9 @@ class DoctrineCouchDBExtension extends AbstractExtension
             new Type\DocumentType($this->registry),
         );
     }
+
+    protected function loadTypeGuesser()
+    {
+        return new CouchDBTypeGuesser($this->registry);
+    }
 }
