@@ -15,6 +15,7 @@
 namespace Doctrine\Bundle\CouchDBBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\RegisterEventListenersAndSubscribersPass;
@@ -23,6 +24,11 @@ use Symfony\Bridge\Doctrine\DependencyInjection\Security\UserProvider\EntityFact
 
 class DoctrineCouchDBBundle extends Bundle
 {
+    /**
+     * @var Closure
+     */
+    private $autoloader;
+
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
@@ -48,7 +54,7 @@ class DoctrineCouchDBBundle extends Bundle
             $dir = $this->container->getParameter('doctrine_couchdb.odm.proxy_dir');
             $container = $this->container;
 
-            spl_autoload_register(function($class) use ($namespace, $dir, $container) {
+            $this->autoloader = function($class) use ($namespace, $dir, $container) {
                 if (0 === strpos($class, $namespace)) {
                     $className = substr($class, strlen($namespace) +1);
                     $file = $dir.DIRECTORY_SEPARATOR.$className.'.php';
@@ -82,7 +88,13 @@ class DoctrineCouchDBBundle extends Bundle
 
                     require $file;
                 }
-            });
+            };
+            spl_autoload_register($this->autoloader);
         }
+    }
+
+    public function shutdown()
+    {
+        spl_autoload_unregiter($this->autoloader);
     }
 }
