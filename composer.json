@@ -18,7 +18,7 @@
         "doctrine/couchdb-odm": "*"
     },
     "autoload": {
-        "psr-0": { "Doctrine\\Bundle\\DoctrineCouchDBBundle": "" }
+        "psr-0": { "Doctrine\\Bundle\\CouchDBBundle": "" }
     },
-    "target-dir": "Doctrine/Bundle/DoctrineCouchDBBundle"
+    "target-dir": "Doctrine/Bundle/CouchDBBundle"
 }
