@@ -80,19 +80,32 @@ class CouchDBTypeGuesser implements FormTypeGuesserInterface
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function guessMaxLength($class, $property)
     {
-
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function guessMinLength($class, $property)
     {
-
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function guessRequired($class, $property)
     {
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function guessPattern($class, $property)
+    {
     }
 
     protected function getMetadata($class)
