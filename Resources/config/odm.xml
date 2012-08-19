@@ -86,7 +86,7 @@
         </service>
 
         <!-- security -->
-        <service id="doctrine_couchdb.odm.security.user.provider" class="%doctrine.orm.security.user.provider.class%" abstract="true" public="false">
+        <service id="doctrine_couchdb.odm.security.user.provider" class="%doctrine_couchdb.odm.user_provider.class%" abstract="true" public="false">
             <argument type="service" id="doctrine_couchdb" />
         </service>
 
