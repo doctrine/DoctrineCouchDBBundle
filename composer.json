@@ -14,11 +14,15 @@
         "doctrine/couchdb": "*",
         "symfony/symfony": "2.1.*"
     },
+    "require-dev": {
+        "doctrine/couchdb-odm": "*"
+    },
     "suggest": {
         "doctrine/couchdb-odm": "*"
     },
     "autoload": {
         "psr-0": { "Doctrine\\Bundle\\CouchDBBundle": "" }
     },
-    "target-dir": "Doctrine/Bundle/CouchDBBundle"
+    "target-dir": "Doctrine/Bundle/CouchDBBundle",
+    "minimum-stability": "dev"
 }
