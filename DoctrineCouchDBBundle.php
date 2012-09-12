@@ -95,6 +95,6 @@ class DoctrineCouchDBBundle extends Bundle
 
     public function shutdown()
     {
-        spl_autoload_unregiter($this->autoloader);
+        spl_autoload_unregister($this->autoloader);
     }
 }
