@@ -127,7 +127,7 @@ class XmlDriver extends BaseXmlDriver
     protected function findMappingFile($className)
     {
         $defaultFileName = str_replace('\\', '.', $className) . $this->fileExtension;
-        foreach ($this->paths as $path) {
+        foreach ($this->paths as $path => $prefix) {
             if (!isset($this->prefixes[$path])) {
                 if (file_exists($path . DIRECTORY_SEPARATOR . $defaultFileName)) {
                     return $path . DIRECTORY_SEPARATOR . $defaultFileName;
@@ -146,10 +146,8 @@ class XmlDriver extends BaseXmlDriver
             if (file_exists($filename)) {
                 return $filename;
             }
-
-            throw MappingException::mappingFileNotFound($className, $filename);
         }
 
-        throw MappingException::mappingFileNotFound($className, substr($className, strrpos($className, '\\') + 1).$this->fileExtension);
+        throw MappingException::mappingFileNotFound($className, $defaultFileName);
     }
 }
