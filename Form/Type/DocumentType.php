@@ -17,17 +17,22 @@ namespace Doctrine\Bundle\CouchDBBundle\Form\Type;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\Form\Type\DoctrineType;
 use Symfony\Component\Form\Exception\FormException;
+use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityLoaderInterface;
 
 class DocumentType extends DoctrineType
 {
     /**
-     * Return the loader object.
+     * CouchDB does not support the queryBuilder, will throw a FormException upon invocation
      *
      * @param ObjectManager $manager
-     * @param array $options
+     * @param mixed         $queryBuilder
+     * @param string        $class
+     *
      * @return EntityLoaderInterface
+     *
+     * @throws FormException
      */
-    protected function getLoader(ObjectManager $manager, array $options)
+    public function getLoader(ObjectManager $manager, $queryBuilder, $class)
     {
         throw new FormException('The query builder option is not supported by CouchDB.');
     }
