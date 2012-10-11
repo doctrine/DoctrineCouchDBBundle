@@ -59,7 +59,7 @@ class DoctrineCouchDBBundle extends Bundle
                     $className = substr($class, strlen($namespace) +1);
                     $file = $dir.DIRECTORY_SEPARATOR.$className.'.php';
 
-                    if (!is_file($file) && $container->getParameter('kernel.debug')) {
+                    if (!is_file($file) && $container->getParameter('doctrine_couchdb.odm.auto_generate_proxy_classes')) {
                         $originalClassName = substr($className, 0, -5);
                         $registry = $container->get('doctrine_couchdb');
 
