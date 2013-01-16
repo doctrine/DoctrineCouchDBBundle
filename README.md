@@ -25,6 +25,10 @@ on the AbstractDoctrineBundle aswell:
       odm:
         auto_mapping: true
 
+or call
+
+    php app/console config:dump-reference doctrine_couch_db
+
 ## Annotations
 
 An example of how to use annotations with CouchDB and Symfony:
