@@ -25,7 +25,7 @@ on the AbstractDoctrineBundle aswell:
       odm:
         auto_mapping: true
 
-or call
+To dump the configuration reference of this bundle
 
     php app/console config:dump-reference doctrine_couch_db
 
