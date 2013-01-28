@@ -12,7 +12,7 @@ STABILITY: Alpha
 
 ## Documentation
 
-See the [Doctrine CouchDB ODM](http://www.doctrine-project.org/projects/couchdb-odm.html) documentation for more information.
+See the [Doctrine CouchDB ODM](http://docs.doctrine-project.org/projects/doctrine-couchdb/en/latest/index.html) documentation for more information.
 
 ## Configuration
 
