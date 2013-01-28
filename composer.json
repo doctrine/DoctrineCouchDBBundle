@@ -11,14 +11,13 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "doctrine/couchdb": "*",
-        "symfony/symfony": "2.1.*"
+        "doctrine/couchdb-odm": "*",
+        "symfony/doctrine-bridge": ">=2.0.0,<2.2.0-dev",
+        "symfony/framework-bundle": ">=2.0.0,<2.2.0-dev"
     },
     "require-dev": {
-        "doctrine/couchdb-odm": "*"
     },
     "suggest": {
-        "doctrine/couchdb-odm": "*"
     },
     "autoload": {
         "psr-0": { "Doctrine\\Bundle\\CouchDBBundle": "" }

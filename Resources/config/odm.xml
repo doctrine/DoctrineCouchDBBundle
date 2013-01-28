@@ -26,7 +26,7 @@
         <!-- form field factory guesser -->
         <parameter key="form.type_guesser.doctrine_couchdb.class">Doctrine\Bundle\CouchDBBundle\Form\CouchDBTypeGuesser</parameter>
 
-        <parameter key="doctrine_couchdb.odm.metadata.driver_chain.class">Doctrine\ODM\CouchDB\Mapping\Driver\DriverChain</parameter>
+        <parameter key="doctrine_couchdb.odm.metadata.driver_chain.class">Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain</parameter>
         <parameter key="doctrine_couchdb.odm.metadata.annotation.class">Doctrine\ODM\CouchDB\Mapping\Driver\AnnotationDriver</parameter>
         <parameter key="doctrine_couchdb.odm.metadata.annotation_reader.class">Doctrine\Common\Annotations\AnnotationReader</parameter>
         <parameter key="doctrine_couchdb.odm.metadata.xml.class">Doctrine\Bundle\CouchDBBundle\Mapping\Driver\XmlDriver</parameter>
