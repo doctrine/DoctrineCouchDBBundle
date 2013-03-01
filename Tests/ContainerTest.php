@@ -40,6 +40,16 @@ class ContainerTest extends TestCase
         $this->assertInstanceOf('Doctrine\ODM\CouchDB\DocumentManager', $container->get('doctrine_couchdb.odm.test_document_manager'));
     }
 
+    public function testAllOrNothingFlush()
+    {
+        $container = $this->createYamlBundleTestContainer();
+        $dm = $container->get('doctrine_couchdb.odm.test_document_manager');
+
+        $config = $dm->getConfiguration();
+
+        $this->assertFalse($config->getAllOrNothingFlush());
+
+    }
 
     public function createYamlBundleTestContainer()
     {
@@ -69,7 +79,8 @@ class ContainerTest extends TestCase
                                     'dir' => __DIR__ . "/DependencyInjection/Fixtures/Bundles/YamlBundle/Resources/config/doctrine",
                                     'prefix' => 'Fixtures\Bundles\YamlBundle\CouchDocument',
                                 )
-                            )
+                            ),
+                            'all_or_nothing_flush' => false,
                         )
                     )
                 )

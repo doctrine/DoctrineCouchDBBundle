@@ -163,6 +163,8 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             $odmConfigDef->addMethodCall($method, array($arg));
         }
 
+        $odmConfigDef->addMethodCall('setAllOrNothingFlush', array($documentManager['all_or_nothing_flush']));
+
         if (!isset($documentManager['connection'])) {
             $documentManager['connection'] = $this->defaultConnection;
         }
