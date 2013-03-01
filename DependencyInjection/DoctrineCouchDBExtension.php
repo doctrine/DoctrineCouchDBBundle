@@ -150,6 +150,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
         $odmConfigDef = $container->setDefinition(sprintf('doctrine_couchdb.odm.%s_configuration', $documentManager['name']), new DefinitionDecorator('doctrine_couchdb.odm.configuration'));
 
         $this->loadOdmDocumentManagerMappingInformation($documentManager, $odmConfigDef, $container);
+        $this->loadOdmDocumentManagerDesignDocuments($documentManager, $odmConfigDef);
         $this->loadOdmCacheDrivers($documentManager, $container);
 
         $methods = array(
@@ -220,6 +221,25 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
 
 
         $odmConfig->addMethodCall('setDocumentNamespaces', array($this->aliasMap));
+    }
+
+    /**
+     * Loads configured design_documents.
+     *
+     * @param array $documentManager The document manager configuration.
+     * @param Definition $odmConfig A service definition instance.
+     */
+    protected function loadOdmDocumentManagerDesignDocuments(array $documentManager, Definition $odmConfig)
+    {
+        foreach ($documentManager['design_documents'] as $name => $designDocument) {
+            $odmConfig->addMethodCall(
+                'addDesignDocument', array(
+                    $name,
+                    $designDocument['className'],
+                    $designDocument['options']
+                )
+            );
+        }
     }
 
     /**
