@@ -11,6 +11,14 @@ STABILITY: Alpha
 * If you do not use composer, do not forget to add autoloader for the Doctrine\CouchDB, 
   Doctrine\ODM\CouchDB and Doctrine\Bundle namespaces
 
+To use the annotations, register them in your app/autoload.php file:
+
+    use Doctrine\Common\Annotations\AnnotationRegistry;
+    AnnotationRegistry::registerAutoloadNamespace(
+        'Doctrine\ODM\CouchDB\Mapping', 
+        __DIR__ . '/../vendor/doctrine/couchdb-odm/lib/Doctrine/ODM/CouchDB/Mapping/Annotations'
+    );
+
 ## Documentation
 
 See the [Doctrine CouchDB ODM](http://docs.doctrine-project.org/projects/doctrine-couchdb/en/latest/index.html) documentation for more information.
