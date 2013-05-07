@@ -81,9 +81,29 @@ class DoctrineCouchDBMappingsPass extends BaseMappingPass
     {
         $arguments = array($mappings, '.couchdb.yml');
         $locator = new Definition('Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator', $arguments);
-        $driver = new Definition('Doctrine\Bundle\CouchDBBundle\Mapping\Driver\YamlDriver', array($locator));
+        $driver = new Definition('Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver', array($locator));
 
         return new DoctrineCouchDBMappingsPass($driver, $mappings, $managerParameters, $enabledParameter);
+    }
+
+    /**
+     * @param array    $namespaces        List of namespaces that are handled with annotation mapping
+     * @param array    $directories       List of directories to look for annotation mapping files
+     * @param string[] $managerParameters List of parameters that could which object manager name
+     *                                    your bundle uses. This compiler pass will automatically
+     *                                    append the parameter name for the default entity manager
+     *                                    to this list.
+     * @param string   $enabledParameter  Service container parameter that must be present to
+     *                                    enable the mapping. Set to false to not do any check,
+     *                                    optional.
+     */
+    public static function createAnnotationMappingDriver(array $namespaces, array $directories, array $managerParameters, $enabledParameter = false)
+    {
+        $arguments = array(new Reference('doctrine_couchdb.odm.metadata.annotation_reader'), $directories);
+        $locator = new Definition('Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator', $arguments);
+        $driver = new Definition('Doctrine\ODM\CouchDB\Mapping\Driver\AnnotationDriver', array($locator));
+
+        return new DoctrineCouchDBMappingsPass($driver, $namespaces, $managerParameters, $enabledParameter);
     }
 
     /**
