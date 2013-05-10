@@ -14,10 +14,7 @@ STABILITY: Alpha
 To use the annotations, register them in your app/autoload.php file:
 
     use Doctrine\Common\Annotations\AnnotationRegistry;
-    AnnotationRegistry::registerAutoloadNamespace(
-        'Doctrine\ODM\CouchDB\Mapping', 
-        __DIR__ . '/../vendor/doctrine/couchdb-odm/lib/Doctrine/ODM/CouchDB/Mapping/Annotations'
-    );
+    AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 ## Documentation
 
