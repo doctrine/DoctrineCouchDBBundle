@@ -12,9 +12,8 @@
 
 namespace Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler;
 
-use Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterMappingsPass as BaseMappingPass;
+use Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterMappingsPass;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -23,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author David Buchmann <david@liip.ch>
  */
-class DoctrineCouchDBMappingsPass extends BaseMappingPass
+class DoctrineCouchDBMappingsPass extends RegisterMappingsPass
 {
     /**
      * You should not directly instantiate this class but use one of the
