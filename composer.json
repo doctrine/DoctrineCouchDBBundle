@@ -11,9 +11,10 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "doctrine/couchdb-odm": "*",
-        "symfony/doctrine-bridge": ">=2.0.0,<2.3.0-dev",
-        "symfony/framework-bundle": ">=2.0.0,<2.3.0-dev"
+        "doctrine/couchdb-odm": "@dev",
+        "doctrine/couchdb": "@dev",
+        "symfony/doctrine-bridge": "~2.0",
+        "symfony/framework-bundle": "~2.0"
     },
     "require-dev": {
     },
@@ -22,6 +23,5 @@
     "autoload": {
         "psr-0": { "Doctrine\\Bundle\\CouchDBBundle": "" }
     },
-    "target-dir": "Doctrine/Bundle/CouchDBBundle",
-    "minimum-stability": "dev"
+    "target-dir": "Doctrine/Bundle/CouchDBBundle"
 }
