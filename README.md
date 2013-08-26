@@ -6,9 +6,15 @@ STABILITY: Alpha
 
 ## Installation
 
-* Grab this repository and [Doctrine CouchDB ODM](http://github.com/doctrine/couchdb-odm) into your Symfony project
+* ``composer require doctrine/couchdb-odm-bundle``
 * Add `Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle` to your Kernel#registerBundles() method
-* Add autoloader for Doctrine\CouchDB, Doctrine\ODM\CouchDB and Doctrine\Bundle namespaces
+* If you do not use composer, do not forget to add autoloader for the Doctrine\CouchDB, 
+  Doctrine\ODM\CouchDB and Doctrine\Bundle namespaces
+
+To use the annotations, register them in your app/autoload.php file:
+
+    use Doctrine\Common\Annotations\AnnotationRegistry;
+    AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
 ## Documentation
 
