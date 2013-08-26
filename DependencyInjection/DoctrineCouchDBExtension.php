@@ -157,7 +157,7 @@ class DoctrineCouchDBExtension extends AbstractDoctrineExtension
             'setMetadataDriverImpl'       => new Reference('doctrine_couchdb.odm.'.$documentManager['name'].'_metadata_driver'),
             'setProxyDir'                 => '%doctrine_couchdb.odm.proxy_dir%',
             'setProxyNamespace'           => '%doctrine_couchdb.odm.proxy_namespace%',
-            #'setAutoGenerateProxyClasses' => '%doctrine_couchdb.odm.auto_generate_proxy_classes%',
+            'setAutoGenerateProxyClasses' => '%doctrine_couchdb.odm.auto_generate_proxy_classes%',
         );
         foreach ($methods as $method => $arg) {
             $odmConfigDef->addMethodCall($method, array($arg));
