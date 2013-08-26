@@ -38,7 +38,7 @@ class ReplicationStartCommand extends DoctrineReplicationStartCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        DoctrineCommandHelper::setApplicationCouchDBClient($this->getApplication(), $input->getOption('conn'));
+        DoctrineCommandHelper::setApplicationCouchDBClient($this->getApplication(), $input->getOption('conn') ?: 'default');
 
         return parent::execute($input, $output);
     }

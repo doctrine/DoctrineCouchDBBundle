@@ -22,7 +22,7 @@ class UpdateDesignDocCommand extends DoctrineUpdateDesignDocCommand
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        DoctrineCommandHelper::setApplicationDocumentManager($this->getApplication(), $input->getOption('dm'));
+        DoctrineCommandHelper::setApplicationDocumentManager($this->getApplication(), $input->getOption('dm') ?: 'default');
 
         return parent::execute($input, $output);
     }
