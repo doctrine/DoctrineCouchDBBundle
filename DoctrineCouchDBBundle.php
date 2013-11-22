@@ -64,7 +64,7 @@ class DoctrineCouchDBBundle extends Bundle
                         $registry = $container->get('doctrine_couchdb');
 
                         // Tries to auto-generate the proxy file
-                        foreach ($registry->getObjectManagers() as $manager) {
+                        foreach ($registry->getManagers() as $manager) {
 
                             if ($manager->getConfiguration()->getAutoGenerateProxyClasses()) {
                                 $classes = $manager->getMetadataFactory()->getAllMetadata();
