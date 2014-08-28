@@ -118,7 +118,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'default_document_manager' => 'default',
                 'document_managers' => array(
                     'default' => array(
-                        'metadata_cache_driver' => array('type' => 'array'),
+                        'metadata_cache_driver' => array('type' => 'array', 'namespace' => null),
                         'auto_mapping' => false,
                         'mappings' => array(),
                         'design_documents' => array(),
@@ -156,7 +156,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'document_managers' => array(
                     'test' => array(
                         'connection' => 'default',
-                        'metadata_cache_driver' => array('type' => 'array'),
+                        'metadata_cache_driver' => array('type' => 'array', 'namespace' => null),
                         'auto_mapping' => false,
                         'mappings' => array(),
                         'design_documents' => array(),
@@ -166,7 +166,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'all_or_nothing_flush' => true,
                     ),
                     'test2' => array(
-                        'metadata_cache_driver' => array('type' => 'array'),
+                        'metadata_cache_driver' => array('type' => 'array', 'namespace' => null),
                         'auto_mapping' => false,
                         'mappings' => array(),
                         'design_documents' => array(),
