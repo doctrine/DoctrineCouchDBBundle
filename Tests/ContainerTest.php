@@ -40,6 +40,26 @@ class ContainerTest extends TestCase
         $this->assertInstanceOf('Doctrine\ODM\CouchDB\DocumentManager', $container->get('doctrine_couchdb.odm.test_document_manager'));
     }
 
+    public function testDesignDocuments()
+    {
+        $container = $this->createYamlBundleTestContainer();
+        $dm = $container->get('doctrine_couchdb.odm.test_document_manager');
+        $config = $dm->getConfiguration();
+
+        $this->assertNotNull($config->getDesignDocument('mydoc'));
+
+    }
+
+    public function testAllOrNothingFlush()
+    {
+        $container = $this->createYamlBundleTestContainer();
+        $dm = $container->get('doctrine_couchdb.odm.test_document_manager');
+
+        $config = $dm->getConfiguration();
+
+        $this->assertFalse($config->getAllOrNothingFlush());
+
+    }
 
     public function createYamlBundleTestContainer()
     {
@@ -68,6 +88,13 @@ class ContainerTest extends TestCase
                                     'type' => 'yml',
                                     'dir' => __DIR__ . "/DependencyInjection/Fixtures/Bundles/YamlBundle/Resources/config/doctrine",
                                     'prefix' => 'Fixtures\Bundles\YamlBundle\CouchDocument',
+                                )
+                            ),
+                            'all_or_nothing_flush' => false,
+                            'design_documents' => array(
+                                'mydoc' => array(
+                                    'className' => 'Doctrine\CouchDB\View\FolderDesignDocument',
+                                    'options' => array('test'),
                                 )
                             )
                         )
