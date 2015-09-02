@@ -17,7 +17,7 @@ class UpdateDesignDocCommand extends DoctrineUpdateDesignDocCommand
 
         $this
             ->setName('doctrine:couchdb:update-design-doc')
-            ->addOption('dm', null, InputOption::VALUE_OPTIONAL, 'The document manager to use for this command');
+            ->addOption('dm', null, InputOption::VALUE_OPTIONAL, 'The document manager to use for this command', 'default');
     }
     
     protected function execute(InputInterface $input, OutputInterface $output)
