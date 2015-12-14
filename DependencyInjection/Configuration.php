@@ -116,6 +116,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('password')->defaultNull()->end()
                     ->scalarNode('ip')->defaultNull()->end()
                     ->scalarNode('url')->defaultNull()->end()
+                    ->scalarNode('ssl')->defaultValue(false)->end()
                     ->booleanNode('logging')->defaultValue($this->debug)->end()
                     ->scalarNode('type')->end()
                 ->end()
