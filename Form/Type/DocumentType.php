@@ -14,6 +14,7 @@
 
 namespace Doctrine\Bundle\CouchDBBundle\Form\Type;
 
+use Doctrine\Bundle\CouchDBBundle\Form\ChoiceList\CouchDBEntityLoader;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\Form\Type\DoctrineType;
 use Symfony\Component\Form\Exception\FormException;
@@ -34,7 +35,10 @@ class DocumentType extends DoctrineType
      */
     public function getLoader(ObjectManager $manager, $queryBuilder, $class)
     {
-        throw new FormException('The query builder option is not supported by CouchDB.');
+        return new CouchDBEntityLoader(
+            $manager,
+            $class
+        );
     }
 
     public function getName()
