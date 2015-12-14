@@ -57,10 +57,10 @@ class DoctrineCouchDBBundle extends Bundle
             $this->autoloader = function($class) use ($namespace, $dir, $container) {
                 if (0 === strpos($class, $namespace)) {
                     $className = substr($class, strlen($namespace) +1);
-                    $file = $dir.DIRECTORY_SEPARATOR.$className.'.php';
+                    $file = $dir.DIRECTORY_SEPARATOR . str_replace('\\', '', $className) . '.php';
 
                     if (!is_file($file) && $container->getParameter('doctrine_couchdb.odm.auto_generate_proxy_classes')) {
-                        $originalClassName = substr($className, 0, -5);
+                        $originalClassName = substr($className, 7);
                         $registry = $container->get('doctrine_couchdb');
 
                         // Tries to auto-generate the proxy file
@@ -70,9 +70,7 @@ class DoctrineCouchDBBundle extends Bundle
                                 $classes = $manager->getMetadataFactory()->getAllMetadata();
 
                                 foreach ($classes as $class) {
-                                    $name = str_replace('\\', '', $class->name);
-
-                                    if ($name == $originalClassName) {
+                                    if ($class->name == $originalClassName) {
                                         $manager->getProxyFactory()->generateProxyClasses(array($class));
                                     }
                                 }
