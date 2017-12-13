@@ -20,7 +20,7 @@
 
 namespace Doctrine\Bundle\CouchDBBundle\Mapping\Driver;
 
-use Doctrine\ODM\CouchDB\Mapping\Driver\XmlDriver as BaseYamlDriver;
+use Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver as BaseYamlDriver;
 use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 
 /**
