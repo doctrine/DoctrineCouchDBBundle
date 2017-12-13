@@ -17,12 +17,9 @@
 
     <services>
 
-        <service id="doctrine_couchdb.client.connection"
-            class="%doctrine_couchdb.client.connection.class%"
-            factory-class="%doctrine_couchdb.client.connection.class%"
-            factory-method="create"
-            abstract="true"
-        />
+        <service id="doctrine_couchdb.client.connection" class="%doctrine_couchdb.client.connection.class%">
+            <factory class="%doctrine_couchdb.client.connection.class%" method="create" />
+        </service>
 
         <service id="doctrine_couchdb.datacollector" class="%doctrine_couchdb.datacollector.class%">
             <tag name="data_collector" template="DoctrineCouchDBBundle:Collector:couchdb" id="couchdb" />
