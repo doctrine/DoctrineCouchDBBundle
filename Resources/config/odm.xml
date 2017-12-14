@@ -39,9 +39,7 @@
     </parameters>
 
     <services>
-        <service id="doctrine_couchdb.odm.metadata.annotation_reader" class="%doctrine_couchdb.odm.metadata.annotation_reader.class%" public="false">
-            <argument type="service" id="annotation_reader" />
-        </service>
+        <service id="doctrine_couchdb.odm.metadata.annotation_reader" class="%doctrine_couchdb.odm.metadata.annotation_reader.class%" public="false"></service>
 
         <service id="doctrine_couchdb.odm.proxy_cache_warmer" class="%doctrine_couchdb.odm.proxy_cache_warmer.class%" public="false">
             <tag name="kernel.cache_warmer" />
